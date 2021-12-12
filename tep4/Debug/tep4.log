@@ -1,0 +1,17 @@
+﻿  lab4.cpp
+D:\GIT\TEP\tep4\NodeDynamic.h(144,20): warning C4018: '<': signed/unsigned mismatch
+D:\GIT\TEP\tep4\NodeDynamic.h(153,20): warning C4018: '<': signed/unsigned mismatch
+D:\GIT\TEP\tep4\NodeDynamic.h(56,20): warning C4018: '<': signed/unsigned mismatch
+D:\GIT\TEP\tep4\NodeDynamic.h(54): message : while compiling class template member function 'NodeDynamic<int>::~NodeDynamic(void)'
+D:\GIT\TEP\tep4\NodeDynamic.h(28): message : see reference to function template instantiation 'NodeDynamic<int>::~NodeDynamic(void)' being compiled
+D:\GIT\TEP\tep4\NodeDynamic.h(64): message : while compiling class template member function 'void NodeDynamic<int>::addNewChild(void)'
+D:\GIT\TEP\tep4\lab4.cpp(9): message : see reference to function template instantiation 'void NodeDynamic<int>::addNewChild(void)' being compiled
+D:\GIT\TEP\tep4\NodeDynamic.h(39): message : see reference to class template instantiation 'NodeDynamic<int>' being compiled
+D:\GIT\TEP\tep4\NodeDynamic.h(115,20): warning C4018: '<': signed/unsigned mismatch
+D:\GIT\TEP\tep4\NodeDynamic.h(109): message : while compiling class template member function 'void NodeDynamic<int>::printTreeReal(void)'
+D:\GIT\TEP\tep4\TreeDynamic.h(54): message : see reference to function template instantiation 'void NodeDynamic<int>::printTreeReal(void)' being compiled
+D:\GIT\TEP\tep4\NodeDynamic.h(119,21): warning C4018: '<': signed/unsigned mismatch
+D:\GIT\TEP\tep4\NodeDynamic.h(131,20): warning C4018: '<': signed/unsigned mismatch
+D:\GIT\TEP\tep4\NodeDynamic.h(130): message : while compiling class template member function 'void NodeDynamic<std::string>::deleteFromChildren(void)'
+D:\GIT\TEP\tep4\TreeDynamic.h(41): message : see reference to function template instantiation 'void NodeDynamic<std::string>::deleteFromChildren(void)' being compiled
+  tep4.vcxproj -> D:\GIT\TEP\tep4\Debug\tep4.exe
