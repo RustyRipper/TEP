@@ -1,0 +1,4 @@
+﻿  lab5.cpp
+F:\Git\TEP\tep5\tep5\tep5\Table.h(4,1): warning C4005: 'DEFAULT_LENGTH': macro redefinition
+F:\Git\TEP\tep5\tep5\tep5\Tab.h(2): message : see previous definition of 'DEFAULT_LENGTH'
+  tep5.vcxproj -> F:\Git\TEP\tep5\tep5\Debug\tep5.exe
