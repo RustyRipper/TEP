@@ -23,17 +23,17 @@ public:
 	int getLength();
 	void setValueAt(int offset, int newVal);
 	void print();
-	
+
 	void modTab(Table* tab, int newSize);
 	void modTab(Table tab, int newSize);
-	
+
 	Table* clone();
-	/*Table operator=(const Table& other);
+	Table& operator=(const Table& other);
 	Table operator+(Table& other);
-	void operator++(int);*/
+	//void operator++(int);
 	Table& operator=(Table&& other)noexcept;
-	Table operator+(Table& other);
-	
+	Table operator++(int);
+
 
 
 };

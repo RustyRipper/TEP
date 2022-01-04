@@ -30,10 +30,9 @@ Table::Table(const Table& other) {
 
 Table::Table(Table&& other) noexcept
 {
-	name = other.name+"cMove";
+	name = other.name + "cMove";
 	moveHelp(other);
-	cout << "MoveConstructor\n";
-
+	cout << "MoveConstructor " << name << "\n";
 }
 
 Table::~Table() {
@@ -86,40 +85,29 @@ void Table::modTab(Table cTab, int iNewSize) {
 	cTab.setNewSize(iNewSize);
 }
 
-
 Table* Table::clone() {
 
 	Table* temp = new Table(*this);
 	return temp;
 
 }
-//Table Table::operator=(const Table& other) {
-//	if (this == &other) {
-//		return *this;
-//	}
-//	delete[] array;
-//	name = other.name;
-//	arrayLength = other.arrayLength;
-//	array = new int[other.arrayLength];
-//	for (int i = 0; i < other.arrayLength; i++) {
-//		array[i] = other.array[i];
-//	}
-//	return *this;
-//
-//}
-//Table Table::operator+(Table& other) {
-//	int newLength = arrayLength + other.arrayLength;
-//	Table temp(name + "+" + other.name, newLength);
-//	for (int i = 0; i < newLength; i++) {
-//		if (i < arrayLength) {
-//			temp.array[i] = array[i];
-//		}
-//		else {
-//			temp.array[i] = other.array[i - arrayLength];
-//		}
-//	}
-//	return temp;
-//}
+
+Table& Table::operator=(const Table& other) {
+	std::cout << "operator=& " << "\n";
+	if (this == &other) {
+		return *this;
+	}
+	delete[] array;
+	name = other.name;
+	arrayLength = other.arrayLength;
+	array = new int[other.arrayLength];
+	for (int i = 0; i < other.arrayLength; i++) {
+		array[i] = other.array[i];
+	}
+	return *this;
+
+}
+
 //void Table ::operator++(int) {
 //	int number = 48;
 //
@@ -144,20 +132,21 @@ Table* Table::clone() {
 
 Table& Table::operator=(Table&& other) noexcept
 {
+	std::cout << "operator=&& " << "\n";
 	if (array != NULL)
 		delete[] array;
 
-	//U¿ywanie konstruktora move//
-	/*Table t(std::move(other));
-	move(t);*/
-	//Bez konstruktora move//
 	moveHelp(other);
 	return *this;
 }
 
+
+
 Table Table::operator+(Table& other) {
+
 	int newLength = arrayLength + other.arrayLength;
 	Table temp(name + "+move+" + other.name, newLength);
+
 	for (int i = 0; i < newLength; i++) {
 		if (i < arrayLength) {
 			temp.array[i] = array[i];
@@ -166,7 +155,33 @@ Table Table::operator+(Table& other) {
 			temp.array[i] = other.array[i - arrayLength];
 		}
 	}
-	return move(temp);
+	return temp;
+}
+
+Table Table ::operator++(int) {
+	int number = 48;
+
+	Table t(name + "++", arrayLength + 1);
+	int* temp = new int[arrayLength + 1];
+
+	for (int i = 0; i < arrayLength; i++) {
+		temp[i] = array[i];
+	}
+	delete[] array;
+
+	arrayLength = arrayLength + 1;
+	array = new int[arrayLength];
+
+	for (int i = 0; i < arrayLength - 1; i++) {
+		t.array[i] = temp[i];
+		array[i] = temp[i];
+	}
+	delete[] temp;
+
+	t.array[arrayLength - 1] = number;
+	array[arrayLength - 1] = number;
+
+	return t;
 }
 
 void Table::moveHelp(Table& other)

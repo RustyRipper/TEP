@@ -1,0 +1,5 @@
+﻿  GAIndividual.cpp
+F:\Git\TEP\miniProject\miniProject\miniProject\GAIndividual.cpp(15,20): warning C4018: '<': signed/unsigned mismatch
+F:\Git\TEP\miniProject\miniProject\miniProject\GAIndividual.cpp(28,21): warning C4018: '<': signed/unsigned mismatch
+F:\Git\TEP\miniProject\miniProject\miniProject\GAIndividual.cpp(55,20): warning C4018: '<': signed/unsigned mismatch
+  miniProject.vcxproj -> F:\Git\TEP\miniProject\miniProject\Debug\miniProject.exe
