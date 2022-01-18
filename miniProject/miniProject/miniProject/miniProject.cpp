@@ -5,30 +5,36 @@
 #include <string>
 #include "Max3SatProblem.h"
 #include "GAIndividual.h"
+#include "GAOptimizer.h"
 
 using namespace std;
 
-
 int main()
 {
-	vector<bool> solutions;
-	for (int i = 0; i < 50; i++) {
-		solutions.push_back(false)  ;
+	int amountOfIteration = 10000;
+	int populationSize = 500;
+	double probabilityOfCrossover = 0.4;
+	double probabilityOfMutation = 0.2;
+
+	Max3SatProblem* m3SP = new Max3SatProblem();;
+
+	string s = to_string(AMOUNT_OF_VARIABLES);
+	(*m3SP).load("m3s_" + s + "_0.txt");
+
+	GAOptimizer optimizer(m3SP, populationSize, probabilityOfCrossover, probabilityOfMutation);
+	optimizer.initialize();
+
+	for (int i = 0; i < amountOfIteration; i++) {
+		optimizer.runIteration();
+		cout << i<< ") "; 
+		optimizer.getBestGAIndividual()->showSolution();
 	}
-	GAIndividual in(solutions);
-	Max3SatProblem m3SP;
-	m3SP.load("m3s_50_0.txt");
-	cout << m3SP.compute(in.getSolution()) << endl;
-	GAIndividual in2(solutions);
-	in2.mutation(in2, 0.35);
-	cout << m3SP.compute(in2.getSolution()) << endl;
-	GAIndividual in3(in2);
-	vector<GAIndividual> children;
-	children = in3.crossover(in, in2, 0.99);
-	cout << m3SP.compute(children.at(0).getSolution()) << endl;
-	cout << m3SP.compute(children.at(1).getSolution()) << endl;
+
+	cout << endl << "BestOne: ";
+	optimizer.getBestGAIndividual()->showSolution();
+	
 	return 0;
-	
-	
+
+
 }
 

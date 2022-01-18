@@ -141,12 +141,14 @@
   <ItemGroup>
     <ClCompile Include="Clause.cpp" />
     <ClCompile Include="GAIndividual.cpp" />
+    <ClCompile Include="GAOptimizer.cpp" />
     <ClCompile Include="Max3SatProblem.cpp" />
     <ClCompile Include="miniProject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clause.h" />
     <ClInclude Include="GAIndividual.h" />
+    <ClInclude Include="GAOptimizer.h" />
     <ClInclude Include="Max3SatProblem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

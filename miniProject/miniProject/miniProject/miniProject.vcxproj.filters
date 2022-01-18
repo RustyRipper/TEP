@@ -27,6 +27,9 @@
     <ClCompile Include="GAIndividual.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GAOptimizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Max3SatProblem.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GAIndividual.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GAOptimizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

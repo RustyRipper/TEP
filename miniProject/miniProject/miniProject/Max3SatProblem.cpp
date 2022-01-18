@@ -6,38 +6,50 @@
 using namespace std;
 Max3SatProblem::Max3SatProblem()
 {
-	
+
+}
+
+Max3SatProblem::~Max3SatProblem()
+{
+	for (int i = 0; i < clauses.size(); i++) {
+		delete clauses.at(i);
+	}
+	clauses.clear();
 }
 
 bool Max3SatProblem::load(string path)
 {
 	fstream file;
 	file.open(path, ios::in);
+
 	if (file.good() == false) {
 		cout << "File doesnt exist";
-		exit(0);
+		return false;
 	}
 	string line;
 
 	while (getline(file, line)) {
-		
-		string arr[AMOUNT_OF_VARIABLES_IN_THE_CLAUSE+2];
+
+		string arr[AMOUNT_OF_VARIABLES_IN_THE_CLAUSE + 2];
 		int i = 0;
 		stringstream ssin(line);
+
 		while (ssin.good() && i < AMOUNT_OF_VARIABLES_IN_THE_CLAUSE + 2) {
 			ssin >> arr[i];
 			++i;
 		}
+
 		vector<int> values;
-		for (int i = 1; i < sizeof(arr)/sizeof(string) - 1; i++) {
+
+		for (int i = 1; i < sizeof(arr) / sizeof(string) - 1; i++) {
 			values.push_back(atoi(arr[i].c_str()));
 		}
-		Clause* clause= new Clause(values);
-		clauses.push_back(clause);
-	}
-	file.close();
-	return 0;
 
+		clauses.push_back(new Clause(values));
+	}
+
+	file.close();
+	return true;
 }
 
 double Max3SatProblem::compute(vector<bool> solutions)
@@ -47,13 +59,13 @@ double Max3SatProblem::compute(vector<bool> solutions)
 
 		for (int j = 0; j < AMOUNT_OF_VARIABLES_IN_THE_CLAUSE; j++) {
 			if (clauses.at(i)->getValue(j) < 0)
-				clauses.at(i)->setFlag(j,!solutions.at(-1 * clauses.at(i)->getValue(j)));
-			else clauses.at(i)->setFlag(j,solutions.at(clauses.at(i)->getValue(j)));
+				clauses.at(i)->setFlag(j, !solutions.at(-1 * clauses.at(i)->getValue(j)));
+			else clauses.at(i)->setFlag(j, solutions.at(clauses.at(i)->getValue(j)));
 		}
 
 		if (clauses.at(i)->checkClause()) {
 			amountSolutions++;
 		}
 	}
-    return amountSolutions/clauses.size();
+	return (double)amountSolutions / clauses.size();
 }

@@ -1,8 +1,8 @@
 #include "Clause.h"
+#include <iostream>
 
-Clause::Clause(vector<int> &values)
+Clause::Clause(vector<int>& values)
 {
-	
 	for (int i = 0; i < values.size(); i++) {
 		this->values.push_back(values.at(i));
 		flags.push_back(false);
@@ -11,22 +11,41 @@ Clause::Clause(vector<int> &values)
 
 int Clause::getValue(int index)
 {
-	return values.at(index);
+	if (index >= 0 && index < values.size()) {
+		return values.at(index);
+	}
+	std::cout << "zly index Clause::getValue" << endl;
+	return 0;
 }
 
 bool Clause::getFlag(int index)
 {
-	return flags.at(index);;
+	if (index >= 0 && index < flags.size()) {
+		return flags.at(index);;
+	}
+	std::cout << "zly index Clause::getFlag" << endl;
+	return false;
 }
 
 void Clause::setValue(int index, int val)
 {
-	values.at(index) = val;
+	if (index >= 0 && index < values.size()) {
+		values.at(index) = val;
+	}
+	else {
+		std::cout << "zly index Clause::setValue" << endl;
+	}
 }
 
 void Clause::setFlag(int index, bool flag)
 {
-	flags.at(index) = flag;
+	if (index >= 0 && index < flags.size()) {
+		flags.at(index) = flag;
+	}
+	else {
+		std::cout << "zly index Clause::setFlag" << endl;
+	}
+
 }
 
 bool Clause::checkClause()
