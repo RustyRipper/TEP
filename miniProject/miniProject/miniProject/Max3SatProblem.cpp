@@ -11,14 +11,22 @@ Max3SatProblem::Max3SatProblem()
 
 Max3SatProblem::~Max3SatProblem()
 {
-	for (int i = 0; i < clauses.size(); i++) {
-		delete clauses.at(i);
+
+	for (int i = 0; i < (int)clauses.size(); i++) {
+		if (clauses.at(i) != NULL) {
+			delete clauses.at(i);
+		}
 	}
 	clauses.clear();
+
 }
 
 bool Max3SatProblem::load(string path)
 {
+	if (this == NULL) {
+		return false;
+	}
+
 	fstream file;
 	file.open(path, ios::in);
 
@@ -52,10 +60,13 @@ bool Max3SatProblem::load(string path)
 	return true;
 }
 
-double Max3SatProblem::compute(vector<bool> solutions)
+double Max3SatProblem::compute(vector<bool>& solutions)
 {
+	if (this == NULL) {
+		return 0.0;
+	}
 	double amountSolutions = 0;
-	for (int i = 0; i < clauses.size(); i++) {
+	for (int i = 0; i < (int)clauses.size(); i++) {
 
 		for (int j = 0; j < AMOUNT_OF_VARIABLES_IN_THE_CLAUSE; j++) {
 			if (clauses.at(i)->getValue(j) < 0)

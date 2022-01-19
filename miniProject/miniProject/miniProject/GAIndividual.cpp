@@ -1,5 +1,4 @@
 #include "GAIndividual.h"
-#include "Max3SatProblem.h"
 #include <time.h>
 
 GAIndividual::GAIndividual()
@@ -7,20 +6,20 @@ GAIndividual::GAIndividual()
 	fitness = 0;
 }
 
-GAIndividual::GAIndividual(vector<bool> solution, Max3SatProblem& m3SP)
+GAIndividual::GAIndividual(vector<bool> genotype, Max3SatProblem& m3SP)
 {
-	this->solution.clear();
-	for (int i = 0; i < solution.size(); i++) {
-		this->solution.push_back(solution.at(i));
+	this->genotype.clear();
+	for (int i = 0; i < (int)genotype.size(); i++) {
+		this->genotype.push_back(genotype.at(i));
 	}
 	fitness = calculateFitness(m3SP);
 }
 
 GAIndividual::GAIndividual(const GAIndividual& other)
 {
-	this->solution.clear();
-	for (int i = 0; i < other.solution.size(); i++) {
-		solution.push_back(other.solution.at(i));
+	this->genotype.clear();
+	for (int i = 0; i < (int)other.genotype.size(); i++) {
+		genotype.push_back(other.genotype.at(i));
 	}
 	fitness = other.fitness;
 }
@@ -28,12 +27,12 @@ GAIndividual::GAIndividual(const GAIndividual& other)
 void GAIndividual::initialize(Max3SatProblem& m3SP)
 {
 	for (int i = 0; i < AMOUNT_OF_VARIABLES; i++) {
-		solution.push_back(rand() % 2);
+		genotype.push_back(rand() % 2);
 	}
 	calculateFitness(m3SP);
 }
 
-vector<GAIndividual*>& GAIndividual::crossover(GAIndividual* parent1, GAIndividual* parent2, double probabilityOfCrossover)
+vector<GAIndividual*> GAIndividual::crossover(GAIndividual* parent1, GAIndividual* parent2, double probabilityOfCrossover)
 {
 	GAIndividual* child1;
 	GAIndividual* child2;
@@ -45,17 +44,17 @@ vector<GAIndividual*>& GAIndividual::crossover(GAIndividual* parent1, GAIndividu
 		child1 = new GAIndividual();
 		child2 = new GAIndividual();
 
-		for (int i = 0; i < parent1->solution.size(); i++) {
+		for (int i = 0; i < (int)parent1->genotype.size(); i++) {
 
 			temp = rand() % 100;
 
 			if (temp < probabilityOfCrossover * 100) {
-				child1->solution.push_back(parent2->solution.at(i));
-				child2->solution.push_back(parent1->solution.at(i));
+				child1->genotype.push_back(parent2->genotype.at(i));
+				child2->genotype.push_back(parent1->genotype.at(i));
 			}
 			else {
-				child1->solution.push_back(parent1->solution.at(i));
-				child2->solution.push_back(parent2->solution.at(i));
+				child1->genotype.push_back(parent1->genotype.at(i));
+				child2->genotype.push_back(parent2->genotype.at(i));
 			}
 		}
 	}
@@ -71,14 +70,16 @@ vector<GAIndividual*>& GAIndividual::crossover(GAIndividual* parent1, GAIndividu
 
 void GAIndividual::mutation(double probabilityOfMutation)
 {
-	double tempProbability;
-	int index;
-	for (int i = 0; i < solution.size() / 10; i++) {
+	double percentGenesForMutation = 0.1;
+	double tempProbability = 0.0;
+	int index = 0;
+
+	for (int i = 0; i < (int)genotype.size() * percentGenesForMutation; i++) {
 
 		tempProbability = rand() % 100;
 		if (tempProbability < probabilityOfMutation * 100) {
-			index = rand() % solution.size();
-			this->solution.at(index) = !solution.at(index);
+			index = rand() % genotype.size();
+			this->genotype.at(index) = !genotype.at(index);
 		}
 	}
 }
@@ -88,21 +89,21 @@ double GAIndividual::getFitness()
 	return fitness;
 }
 
-vector<bool> GAIndividual::getSolution()
+vector<bool> GAIndividual::getGenotype()
 {
-	return solution;
+	return genotype;
 }
 
-void GAIndividual::showSolution()
+void GAIndividual::showGenotype()
 {
-	for (int i = 0; i < solution.size(); i++) {
-		std::cout << solution.at(i);
+	for (int i = 0; i < (int)genotype.size(); i++) {
+		std::cout << genotype.at(i);
 	}
 	cout << "  Fitness = " << fitness << endl;
 }
 
 double GAIndividual::calculateFitness(Max3SatProblem& m3SP)
 {
-	fitness = m3SP.compute(solution);
+	fitness = m3SP.compute(genotype);
 	return fitness;
 }

@@ -1,18 +1,7 @@
 ﻿  GAIndividual.cpp
-F:\Git\TEP\miniProject\miniProject\miniProject\GAIndividual.cpp(13,20): warning C4018: '<': signed/unsigned mismatch
-F:\Git\TEP\miniProject\miniProject\miniProject\GAIndividual.cpp(22,20): warning C4018: '<': signed/unsigned mismatch
-F:\Git\TEP\miniProject\miniProject\miniProject\GAIndividual.cpp(48,21): warning C4018: '<': signed/unsigned mismatch
-F:\Git\TEP\miniProject\miniProject\miniProject\GAIndividual.cpp(76,20): warning C4018: '<': signed/unsigned mismatch
-F:\Git\TEP\miniProject\miniProject\miniProject\GAIndividual.cpp(98,20): warning C4018: '<': signed/unsigned mismatch
   GAOptimizer.cpp
-F:\Git\TEP\miniProject\miniProject\miniProject\GAOptimizer.cpp(23,20): warning C4018: '<': signed/unsigned mismatch
-F:\Git\TEP\miniProject\miniProject\miniProject\GAOptimizer.cpp(57,21): warning C4018: '<': signed/unsigned mismatch
-F:\Git\TEP\miniProject\miniProject\miniProject\GAOptimizer.cpp(66,20): warning C4018: '<': signed/unsigned mismatch
-F:\Git\TEP\miniProject\miniProject\miniProject\GAOptimizer.cpp(89,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-F:\Git\TEP\miniProject\miniProject\miniProject\GAOptimizer.cpp(116,20): warning C4018: '<': signed/unsigned mismatch
   Max3SatProblem.cpp
-F:\Git\TEP\miniProject\miniProject\miniProject\Max3SatProblem.cpp(14,20): warning C4018: '<': signed/unsigned mismatch
-F:\Git\TEP\miniProject\miniProject\miniProject\Max3SatProblem.cpp(58,20): warning C4018: '<': signed/unsigned mismatch
   miniProject.cpp
   Generating Code...
+F:\Git\TEP\miniProject\miniProject\miniProject\GAOptimizer.cpp(90): warning C4715: 'GAOptimizer::getBestGAIndividual': not all control paths return a value
   miniProject.vcxproj -> F:\Git\TEP\miniProject\miniProject\Debug\miniProject.exe
