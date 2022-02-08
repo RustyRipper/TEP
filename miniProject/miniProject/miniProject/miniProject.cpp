@@ -14,15 +14,11 @@ int main()
 	int populationSize = 500;
 	double probabilityOfCrossover = 0.4;
 	double probabilityOfMutation = 0.2;
+	string filePath = "m" + to_string(AMOUNT_OF_VARIABLES_IN_THE_CLAUSE) + "s_" + to_string(AMOUNT_OF_VARIABLES) + "_0.txt";
 
-	Max3SatProblem* m3SP = new Max3SatProblem();
+	GAOptimizer optimizer(populationSize, probabilityOfCrossover, probabilityOfMutation);
 
-	string s = to_string(AMOUNT_OF_VARIABLES);
-
-	if ((*m3SP).load("m3s_" + s + "_0.txt")) {
-
-		GAOptimizer optimizer(m3SP, populationSize, probabilityOfCrossover, probabilityOfMutation);
-		optimizer.initialize();
+	if (optimizer.initialize(filePath)) {
 
 		for (int i = 0; i < amountOfIteration; i++) {
 			optimizer.runIteration();
@@ -33,10 +29,7 @@ int main()
 		cout << endl << "BestOne: ";
 		optimizer.optimize(optimizer.getBestGAIndividual(), 1)->showGenotype();
 	}
-
-
+	
 	return 0;
-
-
 }
 

@@ -2,7 +2,7 @@
 #include "Clause.h"
 #include <string>
 #define AMOUNT_OF_VARIABLES_IN_THE_CLAUSE 3
-#define AMOUNT_OF_VARIABLES 350
+#define AMOUNT_OF_VARIABLES 100
 using namespace std;
 
 class Max3SatProblem {

@@ -2,20 +2,40 @@
 #include <algorithm>
 
 using namespace std;
-GAOptimizer::GAOptimizer(Max3SatProblem* m3SP)
+GAOptimizer::GAOptimizer()
 {
-	this->m3SP = m3SP;
+	m3SP = new Max3SatProblem();
 	populationSize = 500;
 	crossoverProbability = 0.4;
 	mutationProbability = 0.2;
 }
 
-GAOptimizer::GAOptimizer(Max3SatProblem* m3SP, int populationSize, double crossoverProbability, double mutationProbability)
+GAOptimizer::GAOptimizer(int populationSize, double crossoverProbability, double mutationProbability)
 {
-	this->m3SP = m3SP;
-	this->populationSize = populationSize;
-	this->crossoverProbability = crossoverProbability;
-	this->mutationProbability = mutationProbability;
+
+	this->m3SP = new Max3SatProblem();
+	if (populationSize > 0) {
+		this->populationSize = populationSize;
+	}
+	else {
+		this->populationSize = 500;
+	}
+
+	if (crossoverProbability > 0) {
+		this->crossoverProbability = crossoverProbability;
+	}
+	else {
+		this->crossoverProbability = 0.4;
+	}
+
+	if (mutationProbability > 0) {
+		this->mutationProbability = mutationProbability;
+	}
+	else {
+		this->mutationProbability = 0.2;
+	}
+
+
 }
 
 GAOptimizer::~GAOptimizer()
@@ -31,16 +51,20 @@ GAOptimizer::~GAOptimizer()
 	}
 }
 
-void GAOptimizer::initialize()
+bool GAOptimizer::initialize(string path)
 {
 	if (m3SP != NULL) {
-		srand((int)time(NULL));
-		for (int i = 0; i < populationSize; i++) {
+		if (m3SP->load(path)) {
+			srand((int)time(NULL));
+			for (int i = 0; i < populationSize; i++) {
 
-			population.push_back(new GAIndividual());
-			population.at(i)->initialize(*m3SP);
+				population.push_back(new GAIndividual());
+				population.at(i)->initialize(*m3SP);
+			}
+			return true;
 		}
 	}
+	return false;
 }
 
 void GAOptimizer::runIteration()
@@ -63,7 +87,7 @@ void GAOptimizer::runIteration()
 		vector<GAIndividual*> children = crossover(parent1, parent2);
 
 		for (int i = 0; i < (int)children.size(); i++) {
-			mutate(children.at(i));
+			children.at(i)=mutate(children.at(i));
 			children.at(i)->calculateFitness(*m3SP);
 			//newPopulation.push_back(optimize(children.at(i), amountOptimize));
 			newPopulation.push_back(children.at(i));
@@ -118,8 +142,22 @@ vector<GAIndividual*> GAOptimizer::crossover(GAIndividual* parent1, GAIndividual
 
 GAIndividual* GAOptimizer::mutate(GAIndividual* child)
 {
-	child->mutation(mutationProbability);
+	GAIndividual* temp = new GAIndividual(*child);
+	temp->mutation(mutationProbability);
+	temp->calculateFitness(*m3SP);
+	temp = optimize(temp, 1);
+	temp->calculateFitness(*m3SP);
+
+	if (child->getFitness() < temp->getFitness()) {
+		delete child;
+		child = temp;
+	}
+	else {
+		delete temp;
+	}
 	return child;
+	//child->mutation(mutationProbability);
+	//return child;
 }
 
 GAIndividual* GAOptimizer::optimize(GAIndividual* newOne, int amount)
